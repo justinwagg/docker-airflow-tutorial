@@ -18,3 +18,29 @@ docker run \
     -d airflow:0.1.0
 ```
 
+## To view logs
+
+```
+docker logs -f airflow
+```
+
+## To Stop
+
+```
+docker kill airflow
+docker rm airflow
+```
+
+## To remove an image
+
+See the images and version tags
+```
+docker images
+```
+
+
+make sure you use the right version tag
+
+```
+docker rmi airflow:0.1.0
+```
