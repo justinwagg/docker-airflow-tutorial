@@ -27,4 +27,6 @@ ENV AIRFLOW__CORE__LOAD_DEFAULT_CONNECTIONS=False
 ENV AIRFLOW__CORE__FERNET_KEY=this-should-be-unique-and-secret
 ENV AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
 
+COPY ./airflow.cfg ${AIRFLOW_HOME}/airflow.cfg
+
 ENTRYPOINT [ "/entrypoint.sh" ]
