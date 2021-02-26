@@ -11,6 +11,8 @@ RUN apt-get update -yqq \
 	python3-pandas \
 	python3-numpy
 
+RUN apt-get install -y curl
+
 ENV PYTHONPATH="${PYTHONPATH}:/usr/lib/python3/dist-packages"
 ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 RUN pip install -U pip setuptools wheel \
