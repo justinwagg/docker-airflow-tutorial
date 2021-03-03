@@ -11,8 +11,10 @@ RUN apt-get update -yqq \
 	python3-pandas \
 	python3-numpy
 
-ENV PYTHONPATH="${PYTHONPATH}:/usr/lib/python3/dist-packages"
+RUN apt-get install -y curl
 
+ENV PYTHONPATH="${PYTHONPATH}:/usr/lib/python3/dist-packages"
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 RUN pip install -U pip setuptools wheel \
 	&& pip install pyOpenSSL \
     	&& pip install apache-airflow[crypto,aws,slack,postgres]
@@ -26,5 +28,7 @@ ENV AIRFLOW__CORE__LOAD_EXAMPLES=False
 ENV AIRFLOW__CORE__LOAD_DEFAULT_CONNECTIONS=False
 ENV AIRFLOW__CORE__FERNET_KEY=this-should-be-unique-and-secret
 ENV AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True
+
+COPY ./airflow.cfg ${AIRFLOW_HOME}/airflow.cfg
 
 ENTRYPOINT [ "/entrypoint.sh" ]
